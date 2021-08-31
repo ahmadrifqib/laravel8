@@ -1,12 +1,11 @@
-@extends('layouts.app', ['title' => 'About'])
+<x-app-layout title="About Page">
+    @slot('styles')
+    <style>
+        body {
+            background-color: indigo;
+        }
+    </style>
+    @endslot
 
-@section('content')
-<h1>About</h1>
-<div>
-    <strong> ipsum dolor sit amet consectetur adipisicing elit.</strong> Quibusdam veniam unde fuga reiciendis incidunt
-    ipsum
-    perferendis odio debitis! Amet eaque suscipit dolorem tempora itaque doloremque quisquam excepturi? Ipsa,
-    laudantium
-    veritatis!
-</div>
-@endsection
+    <h1>About Page</h1>
+</x-app-layout>

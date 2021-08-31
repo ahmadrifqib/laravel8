@@ -20,9 +20,16 @@ Route::view('contact', 'contact');
 Route::view('about', 'about');
 Route::view('profile', 'profile');
 
-Route::get('a', function (Request $r) {
-    $name = $r->name;
-    return "my name is {$name}";
+//Wildcard
+Route::get('profile/{username}/{posts}', function ($usrnm, $posts) {
+    return view('profile', ['name' => $usrnm, 'posts' => $posts]);
 });
+
+//Request : URL /profile?name=you
+// Route::get('profile', function (Request $r) {
+//     $name = $r->name;
+//     return "my name is {$name}";
+//     //return view ('profile', ['name' => $name]);
+// });
 
 Route::get('profile/{identifier}', [ProfileInformationController::class, '__invoke']);

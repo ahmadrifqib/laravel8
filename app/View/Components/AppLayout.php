@@ -12,10 +12,14 @@ class AppLayout extends Component
      * @return void
      */
     public $title;
+    public $styles = null;
 
     public function __construct($title = null)
     {
-        $this->title = $title ?? "ABC";
+        // Using Operator Ternary
+        // $this->title = $title ? $title : "Pages";
+
+        $this->title = $title ?? "Pages";
     }
 
     /**
