@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileInformationController;
@@ -15,8 +17,12 @@ use App\Http\Controllers\ProfileInformationController;
 |
 */
 
-Route::get('/', fn () => view('home')); //7.4
-Route::view('contact', 'contact');
+//Route::get('/', fn () => view('home')); //7.4
+Route::get('/', HomeController::class);
+//Route::view('contact', 'contact');
+Route::get('contact', [ContactController::class, 'create']);
+Route::post('contact', [ContactController::class, 'store']);
+
 Route::view('about', 'about');
 Route::view('profile', 'profile');
 
