@@ -27,6 +27,7 @@ class AddMarkToTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->dropColumn('mark');
+            //->default(false)
         });
     }
 }
