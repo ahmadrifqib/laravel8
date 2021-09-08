@@ -17,6 +17,8 @@ use App\Http\Controllers\ProfileInformationController;
 |
 */
 
+// Get, Post, Put/Patch, Delete
+
 //Route::get('/', fn () => view('home')); //7.4
 Route::get('/', HomeController::class);
 //Route::view('contact', 'contact');
@@ -31,7 +33,7 @@ Route::get('profile/{username}/{posts}', function ($usrnm, $posts) {
     return view('profile', ['name' => $usrnm, 'posts' => $posts]);
 });
 
-//Request : URL /profile?name=you
+//Request : URL /profile?username=you
 // Route::get('profile', function (Request $r) {
 //     $name = $r->name;
 //     return "my name is {$name}";

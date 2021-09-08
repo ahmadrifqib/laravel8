@@ -16,5 +16,6 @@ class ProfileInformationController extends Controller
     {
         $identifier = $this->identifier;
         return view('profile', ['username' => $identifier]);
+        // return view('profile', ['username' => $request->username]);
     }
 }
