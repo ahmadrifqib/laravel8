@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileInformationController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,11 @@ Route::get('profile/{username}/{posts}', function ($usrnm, $posts) {
 // });
 
 Route::get('profile/{identifier}', [ProfileInformationController::class, '__invoke']);
+
+Route::prefix('tasks')->group(function () {
+    Route::get('', [TaskController::class, 'index']);
+    Route::post('', [TaskController::class, 'store']);
+    Route::get('/{id}/edit', [TaskController::class, 'edit']);
+    Route::put('/{id}', [TaskController::class, 'update']);
+    Route::delete('/{id}', [TaskController::class, 'destroy']);
+});
