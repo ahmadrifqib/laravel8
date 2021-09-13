@@ -17,6 +17,11 @@
                     </li>
                     @endforeach
                 </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li>
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

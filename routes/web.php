@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileInformationController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\ProfileInformationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,3 +62,6 @@ Route::prefix('tasks')->group(function () {
 Route::get('users', [UserController::class, 'index']);
 Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 // user:username
+
+Route::get('register', [RegistrationController::class, 'create'])->name('register');
+Route::post('register', [RegistrationController::class, 'store'])->name('register.store');
