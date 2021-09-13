@@ -19,7 +19,9 @@
 
     {{-- @yield('content') --}}
 
-    {{ $slot }}
+    <div class="pt-4">
+        {{ $slot }}
+    </div>
 
     <script src="/js/app.js"></script>
 </body>

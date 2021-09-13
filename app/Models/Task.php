@@ -10,5 +10,6 @@ class Task extends Model
     use HasFactory;
     //task = singular
     //tasks = plural
-    protected $guarded = [];
+    // protected $guarded = []; //melindungi dari spam
+    protected $fillable = ['list'];
 }
