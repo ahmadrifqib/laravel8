@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileInformationController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ use App\Http\Controllers\TaskController;
 
 //Route::get('/', fn () => view('home')); //7.4
 Route::get('/', HomeController::class);
+// Route::resource('/', HomeController::class);
+
 //Route::view('contact', 'contact');
 Route::get('contact', [ContactController::class, 'create']);
 Route::post('contact', [ContactController::class, 'store']);
@@ -44,9 +47,17 @@ Route::get('profile/{username}/{posts}', function ($usrnm, $posts) {
 Route::get('profile/{identifier}', [ProfileInformationController::class, '__invoke']);
 
 Route::prefix('tasks')->group(function () {
-    Route::get('', [TaskController::class, 'index']);
-    Route::post('', [TaskController::class, 'store']);
-    Route::get('/{id}/edit', [TaskController::class, 'edit']);
-    Route::put('/{id}', [TaskController::class, 'update']);
-    Route::delete('/{id}', [TaskController::class, 'destroy']);
+    Route::get('', [TaskController::class, 'index'])->name('tasks');
+    Route::post('', [TaskController::class, 'store'])->name('tasks.store');
+    Route::prefix('{task}')->group(function () {
+        Route::get('edit', [TaskController::class, 'edit'])->name('tasks.edit');
+        // Route::put('', [TaskController::class, 'update'])->name('tasks.update');
+    });
+    Route::put('/{id}', [TaskController::class, 'update'])->name('tasks.update');
+    Route::delete('/{id}', [TaskController::class, 'destroy'])->name('tasks.delete');
 });
+// Route::resource('tasks', TaskController::class);
+
+Route::get('users', [UserController::class, 'index']);
+Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
+// user:username
