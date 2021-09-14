@@ -17,11 +17,19 @@ class RegistrationController extends Controller
     {
         // dd('success');
         $request->validate([
-            'username' => ['required', 'alpha_num', 'min:3', 'max:25'],
+            'username' => ['required', 'unique:users,username', 'alpha_num', 'min:3', 'max:25'],
             'name' => ['required', 'string', 'min:3'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'unique:users', 'email'],
             'password' => ['required', 'min:8']
         ]);
+
+        // $user = User::where('email', $request->email)
+        //     ->orWhere('username', $request->username)
+        //     ->first();
+
+        // if ($user) {
+        //     dd('user tersedia');
+        // }
 
         User::create([
             'username' => $request->username,
@@ -30,6 +38,7 @@ class RegistrationController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
+        session()->flash('success', 'Thank you, you are now registered.');
         return redirect('/');
     }
 }
