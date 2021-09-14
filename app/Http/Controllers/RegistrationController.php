@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Hash;
 
 class RegistrationController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('guest');
+
+    //         example
+    //         $this->middleware('auth')->except(['index', 'show']);
+    // }
+
     public function create()
     {
         return view('auth.register');

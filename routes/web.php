@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ProfileInformationController;
@@ -47,7 +49,7 @@ Route::get('profile/{username}/{posts}', function ($usrnm, $posts) {
 
 Route::get('profile/{identifier}', [ProfileInformationController::class, '__invoke']);
 
-Route::prefix('tasks')->group(function () {
+Route::prefix('tasks')->middleware('auth')->group(function () {
     Route::get('', [TaskController::class, 'index'])->name('tasks');
     Route::post('', [TaskController::class, 'store'])->name('tasks.store');
     Route::prefix('{task}')->group(function () {
@@ -56,6 +58,8 @@ Route::prefix('tasks')->group(function () {
     });
     Route::put('/{id}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/{id}', [TaskController::class, 'destroy'])->name('tasks.delete');
+
+    Route::post('logout', LogoutController::class)->name('logout');
 });
 // Route::resource('tasks', TaskController::class);
 
@@ -63,5 +67,12 @@ Route::get('users', [UserController::class, 'index']);
 Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 // user:username
 
-Route::get('register', [RegistrationController::class, 'create'])->name('register');
-Route::post('register', [RegistrationController::class, 'store'])->name('register.store');
+
+Route::middleware('guest')->group(function () {
+    Route::get('register', [RegistrationController::class, 'create'])->name('register');
+    Route::post('register', [RegistrationController::class, 'store'])->name('register.store');
+    //valid jika ingin panggil name route di form nya
+
+    Route::get('login', [LoginController::class, 'create'])->name('login');
+    Route::post('login', [LoginController::class, 'store'])->name('login.store');
+});
